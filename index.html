@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarayee Collective | Mother Care, Children & Unisex Premium Fashion</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page { display: none; }
+        .page.active { display: block; }
+        /* Smooth transition for cart drawer */
+        .cart-drawer { transition: transform 0.3s ease-in-out; }
+        .cart-drawer.translate-x-full { transform: translateX(100%); }
+        .cart-drawer.translate-x-0 { transform: translateX(0); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans flex flex-col min-h-screen">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-amber-600 text-white text-xs text-center py-2 px-4 font-medium tracking-wide">
+        ✨ FREE SHIPPING ON ORDERS OVER ₦50,000 | NATIONWIDE DELIVERY IN NIGERIA ✨
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-xs sticky top-0 z-40 navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" onclick="switchPage('home')" class="flex flex-col">
+                <span class="text-2xl font-bold tracking-wider text-gray-900 font-serif">SARAYEE</span>
+                <span class="text-xs uppercase tracking-widest text-amber-700 -mt-1 font-semibold">Collective</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-md">
+                <a href="#" onclick="switchPage('home')" class="nav-link text-gray-700 hover:text-amber-700 transition">Home</a>
+                <a href="#" onclick="switchPage('shop')" class="nav-link text-gray-700 hover:text-amber-700 transition">Shop Catalog</a>
+                <a href="#" onclick="switchPage('contact')" class="nav-link text-gray-700 hover:text-amber-700 transition">Contact Us</a>
+            </nav>
+
+            <!-- Actions (Cart & Mobile Menu) -->
+            <div class="flex items-center space-x-6">
+                <!-- Cart Trigger Button -->
+                <button onclick="toggleCart(true)" class="relative p-2 text-gray-700 hover:text-amber-700 transition focus:outline-none">
+                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-amber-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-700 hover:text-amber-700 transition focus:outline-none">
+                    <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 space-y-3">
+            <a href="#" onclick="switchPage('home'); toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-amber-700">Home</a>
+            <a href="#" onclick="switchPage('shop'); toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-amber-700">Shop Catalog</a>
+            <a href="#" onclick="switchPage('contact'); toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-amber-700">Contact Us</a>
+        </div>
+    </header>
+
+    <!-- MAIN MULTI-PAGE VIEWS -->
+    <main class="flex-grow">
+        
+        <!-- PAGE 1: HOME VIEW -->
+        <div id="page-home" class="page active animate-fadeIn">
+            <!-- Hero Section -->
+            <section class="relative bg-amber-50 py-20 lg:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6 max-w-xl">
+                        <span class="text-amber-700 font-bold uppercase tracking-widest text-sm bg-amber-100 px-3 py-1 rounded-full">All-In-One Luxury Boutique</span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 font-serif leading-tight">
+                            Motherhood, Childhood & Premium Unisex Style.
+                        </h1>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            Discover an curated catalog crafted for beautiful mothers, precious little ones, luxury unisex apparel, authentic organic baby nutrition, premium wigs, and timeless artisanal designer accessories.
+                        </p>
+                        <div class="pt-4 flex flex-wrap gap-4">
+                            <button onclick="switchPage('shop')" class="bg-gray-900 text-white px-8 py-3.5 rounded-lg text-base font-semibold shadow-md hover:bg-amber-700 hover:shadow-lg transition transform hover:-translate-y-0.5">
+                                Explore Full Collection
+                            </button>
+                            <button onclick="filterShopCategory('Mother Care')" class="bg-white text-gray-900 border border-gray-300 px-8 py-3.5 rounded-lg text-base font-semibold hover:bg-gray-50 transition">
+                                Mother & Baby Care
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Hero Visual Layout Grid -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <img src="https://images.unsplash.com/photo-1522337360788-8b13edd793be?auto=format&fit=crop&q=80&w=400" alt="Premium Designer Wear" class="rounded-2xl shadow-md object-cover h-64 w-full">
+                            <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=400" alt="Luxury Baby Wear" class="rounded-2xl shadow-md object-cover h-48 w-full">
+                        </div>
+                        <div class="space-y-4 pt-8">
+                            <img src="https://images.unsplash.com/photo-1515488042361-404e9250afef?auto=format&fit=crop&q=80&w=400" alt="Children Toys and items" class="rounded-2xl shadow-md object-cover h-48 w-full">
+                            <img src="https://images.unsplash.com/photo-1607344645866-009c320c5ab8?auto=format&fit=crop&q=80&w=400" alt="Luxury Hair and Jewelry" class="rounded-2xl shadow-md object-cover h-64 w-full">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Curated Categories Hub -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 font-serif">Shop By Family Collection</h2>
+                    <p class="text-gray-500 mt-2">Premium essentials designed seamlessly for every phase of life.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <div onclick="filterShopCategory('Clothes')" class="cursor-pointer bg-white border border-gray-100 p-6 rounded-2xl text-center shadow-xs hover:shadow-md hover:border-amber-300 transition group">
+                        <div class="w-12 h-12 bg-amber-50 text-amber-700 rounded-xl flex items-center justify-center mx-auto text-xl font-bold group-hover:bg-amber-600 group-hover:text-white transition"><i class="fa-solid fa-shirt"></i></div>
+                        <h3 class="mt-4 font-semibold text-sm text-gray-800">Designer Clothes</h3>
+                    </div>
+                    <div onclick="filterShopCategory('Shoes')" class="cursor-pointer bg-white border border-gray-100 p-6 rounded-2xl text-center shadow-xs hover:shadow-md hover:border-amber-300 transition group">
+                        <div class="w-12 h-12 bg-amber-50 text-amber-700 rounded-xl flex items-center justify-center mx-auto text-xl font-bold group-hover:bg-amber-600 group-hover:text-white transition"><i class="fa-solid fa-shoe-prints"></i></div>
+                        <h3 class="mt-4 font-semibold text-sm text-gray-800">Premium Shoes</h3>
+                    </div>
+                    <div onclick="filterShopCategory('Hairs')" class="cursor-pointer bg-white border border-gray-100 p-6 rounded-2xl text-center shadow-xs hover:shadow-md hover:border-amber-300 transition group">
+                        <div class="w-12 h-12 bg-amber-50 text-amber-700 rounded-xl flex items-center justify-center mx-auto text-xl font-bold group-hover:bg-amber-600 group-hover:text-white transition"><i class="fa-solid fa-sparkles"></i></div>
+                        <h3 class="mt-4 font-semibold text-sm text-gray-800">Luxury Hairs</h3>
+                    </div>
+                    <div onclick="filterShopCategory('Bracelets')" class="cursor-pointer bg-white border border-gray-100 p-6 rounded-2xl text-center shadow-xs hover:shadow-md hover:border-amber-300 transition group">
+                        <div class="w-12 h-12 bg-amber-50 text-amber-700 rounded-xl flex items-center justify-center mx-auto text-xl font-bold group-hover:bg-amber-600 group-hover:text-white transition"><i class="fa-solid fa-gem"></i></div>
+                        <h3 class="mt-4 font-semibold text-sm text-gray-800">Bracelets & Gems</h3>
+                    </div>
+                    <div onclick="filterShopCategory('Baby Food')" class="cursor-pointer bg-white border border-gray-100 p-6 rounded-2xl text-center shadow-xs hover:shadow-md hover:border-amber-300 transition group">
+                        <div class="w-12 h-12 bg-amber-50 text-amber-700 rounded-xl flex items-center justify-center mx-auto text-xl font-bold group-hover:bg-amber-600 group-hover:text-white transition"><i class="fa-solid fa-baby-carriage"></i></div>
+                        <h3 class="mt-4 font-semibold text-sm text-gray-800">Baby Foods</h3>
+                    </div>
+                    <div onclick="filterShopCategory('Pictures')" class="cursor-pointer bg-white border border-gray-100 p-6 rounded-2xl text-center shadow-xs hover:shadow-md hover:border-amber-300 transition group">
+                        <div class="w-12 h-12 bg-amber-50 text-amber-700 rounded-xl flex items-center justify-center mx-auto text-xl font-bold group-hover:bg-amber-600 group-hover:text-white transition"><i class="fa-solid fa-image"></i></div>
+                        <h3 class="mt-4 font-semibold text-sm text-gray-800">Nursery Pictures</h3>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Highlights Grid -->
+            <section class="bg-gray-100 border-y border-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-xs">
+                        <div class="text-amber-700 text-3xl"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">Swift Delivery Logistics</h4>
+                            <p class="text-sm text-gray-500 mt-1">Prompt and safe nationwide doorstep dispatch across all states in Nigeria.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-xs">
+                        <div class="text-amber-700 text-3xl"><i class="fa-brands fa-whatsapp"></i></div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">Interactive WhatsApp Checkout</h4>
+                            <p class="text-sm text-gray-500 mt-1">Tap order and your shopping bag translates automatically into an instantly actionable chat.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-xs">
+                        <div class="text-amber-700 text-3xl"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">Premium Craft Quality</h4>
+                            <p class="text-sm text-gray-500 mt-1">Strict material selection process ensuring optimal comfort and dynamic durability.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Sneak-Peek Slider -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold tracking-tight text-gray-900 font-serif">Trending This Week</h2>
+                        <p class="text-sm text-gray-500 mt-1">Handpicked collection items highly favored by our clients.</p>
+                    </div>
+                    <button onclick="switchPage('shop')" class="text-sm font-semibold text-amber-700 hover:text-amber-800 flex items-center space-x-1">
+                        <span>View Entire 30+ Catalog</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+                <div id="featured-products-container" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Dynamic Top Items Render Injection -->
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE 2: FULL SHOPPING CATALOG VIEW -->
+        <div id="page-shop" class="page animate-fadeIn">
+            <div class="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-3xl font-extrabold font-serif tracking-wide sm:text-4xl">Comprehensive Boutique Catalog</h1>
+                <p class="text-gray-400 mt-2 text-sm sm:text-base max-w-xl mx-auto">Explore over 30+ handpicked products across clothes, footwear, premium haircare, artisan bracelets, baby care, and curated nursery artwork.</p>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8">
+                <!-- Shopping Sidebar Filters Desktop -->
+                <aside class="w-full lg:w-64 space-y-6 shrink-0">
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs">
+                        <h3 class="font-bold text-gray-900 text-sm uppercase tracking-wider mb-4 pb-2 border-b border-gray-100">Filter By Category</h3>
+                        <div id="category-filters-list" class="space-y-2">
+                            <!-- Injected Category Buttons -->
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 p-5 rounded-2xl border border-amber-200">
+                        <h4 class="font-bold text-amber-900 text-sm flex items-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Custom Direct Request?</h4>
+                        <p class="text-xs text-amber-800 mt-2 leading-relaxed">Don't see a specific size, variant, or unique product pattern? Reach out directly via global WhatsApp chat!</p>
+                        <a href="https://wa.me/2347036615507" target="_blank" class="mt-4 block text-center bg-amber-700 text-white font-semibold text-xs py-2 rounded-lg hover:bg-amber-800 transition">Message Sarah directly</a>
+                    </div>
+                </aside>
+
+                <!-- Product Catalog Marketplace Grid -->
+                <div class="flex-grow">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 border-b border-gray-200 mb-6 gap-4">
+                        <div class="text-sm text-gray-500 font-medium">
+                            Showing <span id="displayed-products-count" class="text-gray-900 font-bold">0</span> products in <span id="active-filter-label" class="text-amber-700 font-bold">All Collections</span>
+                        </div>
+                    </div>
+
+                    <div id="market-catalog-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                        <!-- 30+ Dynamic Catalog Products Displayed Here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 3: CONTACT & BOOKING INFO VIEW -->
+        <div id="page-contact" class="page animate-fadeIn">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center max-w-xl mx-auto mb-12">
+                    <h1 class="text-4xl font-extrabold font-serif tracking-tight text-gray-900">Let's Connect Directly</h1>
+                    <p class="text-gray-500 mt-2 text-base">We are fully dedicated to serving you with premium lifestyle, fashion, and motherhood solutions.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 bg-white p-8 sm:p-12 rounded-3xl border border-gray-200 shadow-xs">
+                    <!-- Informational Left Side -->
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 font-serif">Boutique Executive Office</h3>
+                            <p class="text-sm text-gray-500 mt-2 leading-relaxed">Sarayee Collective operates with efficient digital logistics dispatch centrally centered in beautiful Nigeria, providing fluid cross-country delivery services.</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-lg"><i class="fa-brands fa-whatsapp"></i></div>
+                                <div>
+                                    <h4 class="text-xs uppercase tracking-wider text-gray-400 font-bold">WhatsApp Direct Hotline</h4>
+                                    <a href="https://wa.me/2347036615507" target="_blank" class="text-sm font-semibold text-gray-900 hover:text-amber-700 transition">+234 703 661 5507</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-lg"><i class="fa-solid fa-envelope"></i></div>
+                                <div>
+                                    <h4 class="text-xs uppercase tracking-wider text-gray-400 font-bold">Official Support Email</h4>
+                                    <a href="mailto:saraholuchiukaibe@gmail.com" class="text-sm font-semibold text-gray-900 hover:text-amber-700 transition">saraholuchiukaibe@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-lg"><i class="fa-solid fa-clock"></i></div>
+                                <div>
+                                    <h4 class="text-xs uppercase tracking-wider text-gray-400 font-bold">Business Consulting Hours</h4>
+                                    <p class="text-sm font-semibold text-gray-900">Monday - Saturday | 8:00 AM - 8:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                            <span class="text-xs font-bold text-gray-900 uppercase block mb-1">💡 Wholesale & Custom Customization</span>
+                            <span class="text-xs text-gray-500 leading-relaxed block">Are you seeking customized measurements for bridal dresses, custom-styled luxury wigs, group fashion coordination packages, or wholesale toddler nutrition supplies? Reach out to Sarah via email or WhatsApp!</span>
+                        </div>
+                    </div>
+
+                    <!-- Client Message Portal Right Side -->
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 font-serif mb-6">Send an Instant Notification</h3>
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Your Full Name</label>
+                                <input type="text" id="contact-name" required class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm focus:outline-none focus:border-amber-600 focus:bg-white transition" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Specific Inquiry Category</label>
+                                <select id="contact-subject" class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm focus:outline-none focus:border-amber-600 focus:bg-white transition">
+                                    <option>Custom Product Inquiry</option>
+                                    <option>Bulk Order / Wholesale</option>
+                                    <option>Shipping & Delivery Status</option>
+                                    <option>General Feedback</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Detailed Message</label>
+                                <textarea id="contact-message" rows="4" required class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm focus:outline-none focus:border-amber-600 focus:bg-white transition" placeholder="Tell us exactly what you need..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-amber-700 text-white font-semibold py-3.5 rounded-xl shadow-md hover:bg-amber-800 transition">
+                                Launch Chat Request via WhatsApp
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SLIDING SHOPPING CART DRAWER PANEL -->
+    <div id="cart-overlay" class="hidden fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 opacity-0" onclick="toggleCart(false)"></div>
+    <div id="cart-panel" class="fixed top-0 right-0 h-full w-full sm:w-md bg-white shadow-2xl z-50 cart-drawer translate-x-full flex flex-col">
+        <!-- Cart Header -->
+        <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-bag-shopping text-amber-700 text-lg"></i>
+                <h2 class="text-lg font-bold text-gray-900 font-serif">Your Order Selection Bag</h2>
+            </div>
+            <button onclick="toggleCart(false)" class="p-2 text-gray-400 hover:text-gray-600 transition focus:outline-none">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List Container -->
+        <div id="cart-items-container" class="flex-grow overflow-y-auto p-6 space-y-4">
+            <!-- Programmatically Injected Order Items -->
+            <div class="text-center py-12 text-gray-400 space-y-3">
+                <i class="fa-solid fa-box-open text-4xl block text-gray-300"></i>
+                <p class="text-sm">Your shopping bag is completely empty.</p>
+                <button onclick="toggleCart(false); switchPage('shop')" class="text-xs bg-amber-50 text-amber-700 font-bold px-4 py-2 rounded-lg hover:bg-amber-100 transition">Browse Products</button>
+            </div>
+        </div>
+
+        <!-- Cart Summary Sticky Footer -->
+        <div class="p-6 border-t border-gray-100 bg-gray-50 space-y-4">
+            <div class="flex items-center justify-between text-sm font-medium text-gray-500">
+                <span>Subtotal Items Amount:</span>
+                <span id="cart-subtotal" class="text-xl font-extrabold text-gray-900 font-mono">₦0</span>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed">Orders are bundled perfectly and handed to our regional delivery operators instantly upon secure checkout via WhatsApp text.</p>
+            <button onclick="triggerWhatsAppCheckout()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl flex items-center justify-center space-x-3 shadow-md transition transform hover:-translate-y-0.5">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Complete Order via WhatsApp Checkout</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- GLOBAL PERSISTENT FLOATING STICKY CONTACT ACTIONS -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-3">
+        <!-- Mail Action Badge -->
+        <a href="mailto:saraholuchiukaibe@gmail.com" title="Email Us Directly" class="w-12 h-12 bg-white text-gray-700 border border-gray-200 rounded-full flex items-center justify-center shadow-lg hover:bg-amber-50 transition transform hover:scale-105">
+            <i class="fa-solid fa-envelope text-lg"></i>
+        </a>
+        <!-- Main WhatsApp Global Action Badge -->
+        <a href="https://wa.me/2347036615507" target="_blank" title="Instant Chat Assistance" class="w-14 h-14 bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-xl hover:bg-emerald-700 transition transform hover:scale-110 animate-bounce">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+        </a>
+    </div>
+
+    <!-- GLOBAL COMPREHENSIVE FOOTER STRUCTURE -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-gray-800">
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold tracking-wider font-serif">SARAYEE COLLECTIVE</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">Premium all-in-one luxury ecosystem serving high-fashion clothing, professional hairs, bespoke jewelry, and pure organic child nutritional resources.</p>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-amber-500 font-bold mb-4">Explore Links</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" onclick="switchPage('home')" class="hover:text-white transition">Home Page</a></li>
+                    <li><a href="#" onclick="switchPage('shop')" class="hover:text-white transition">Product Catalog</a></li>
+                    <li><a href="#" onclick="switchPage('contact')" class="hover:text-white transition">Contact Portal</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-amber-500 font-bold mb-4">Core Boutique Domains</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" onclick="filterShopCategory('Clothes')" class="hover:text-white transition">Unisex Apparel</a></li>
+                    <li><a href="#" onclick="filterShopCategory('Hairs')" class="hover:text-white transition">Luxury Wigs & Hair Extensions</a></li>
+                    <li><a href="#" onclick="filterShopCategory('Mother Care')" class="hover:text-white transition">Mother & Infant Wellness</a></li>
+                    <li><a href="#" onclick="filterShopCategory('Bracelets')" class="hover:text-white transition">Artisanal Wrist Jewelry</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-amber-500 font-bold mb-4">Hotline Channels</h4>
+                <p class="text-sm text-gray-400">Directly monitored by Executive Founder Sarah.</p>
+                <div class="mt-4 space-y-2 text-sm">
+                    <p class="flex items-center space-x-2 text-gray-300"><i class="fa-brands fa-whatsapp text-emerald-500 text-base"></i> <span>+234 703 661 5507</span></p>
+                    <p class="flex items-center space-x-2 text-gray-300"><i class="fa-solid fa-envelope text-amber-500 text-sm"></i> <span class="break-all">saraholuchiukaibe@gmail.com</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 text-center text-xs text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 Sarayee Collective. All Rights Reserved. Crafted with elite premium quality standards.</p>
+            <p class="tracking-wide">Designed for instant seamless high-speed deployment on <span class="text-gray-300 font-semibold">Vercel</span></p>
+        </div>
+    </footer>
+
+    <!-- CENTRAL PROGRAMMATIC DATABASE AND APPLICATION CODE -->
+    <script>
+        // COMPREHENSIVE FLUID PRODUCT CATALOG ENGINE (30+ RICH MOCK OBJECTS MIXED ACCORDING TO USER REQUIREMENTS)
+        const productsDatabase = [
+            // CATEGORY 1: CLOTHES (UNISEX / CHILDREN / ADULT MALE & FEMALE)
+            { id: 1, name: "Premium Unisex Oversized Linen Co-ord", price: 35000, category: "Clothes", image: "https://images.unsplash.com/photo-1522337360788-8b13edd793be?auto=format&fit=crop&q=80&w=400", desc: "Ultra-breathable premium organic linen set suitable for men and women.", featured: true },
+            { id: 2, name: "Sarayee Signature Agbada Attire Set", price: 75000, category: "Clothes", image: "https://images.unsplash.com/photo-1607344645866-009c320c5ab8?auto=format&fit=crop&q=80&w=400", desc: "Exquisitely tailored custom traditional attire for premium corporate events.", featured: true },
+            { id: 3, name: "Children Unisex Pastel Knit Lounge Set", price: 18500, category: "Clothes", image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=400", desc: "Hypoallergenic luxury cotton knitted comfort coordinates for infants.", featured: true },
+            { id: 4, name: "Luxury Silk Wrap Dressing Robe", price: 28000, category: "Clothes", image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=400", desc: "Smooth high-grade Mulberry silk fluid apparel for lounge comfort.", featured: false },
+            { id: 5, name: "Toddler Organic Cotton Denim Overall", price: 15000, category: "Clothes", image: "https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&q=80&w=400", desc: "Durable soft-washed unisex functional jumpsuit outfit for growing children.", featured: false },
+            { id: 6, name: "Men Structured Casual Suede Blazer", price: 45000, category: "Clothes", image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&q=80&w=400", desc: "Perfect tailored fit, sharp shoulder profile high-texture unisex outerwear.", featured: false },
+            { id: 7, name: "Infant Floral Organza Tutu Dress", price: 22000, category: "Clothes", image: "https://images.unsplash.com/photo-1622290319146-7b63df48a635?auto=format&fit=crop&q=80&w=400", desc: "Graceful birthday milestone specialized dressing item with soft inner lining.", featured: false },
+
+            // CATEGORY 2: HAIRS (PREMIUM WIGS & ACCESSORIES)
+            { id: 8, name: "Luxury Bone Straight HD Lace Wig", price: 180000, category: "Hairs", image: "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=400", desc: "100% premium human hair with seamless HD translucent base ventilation.", featured: true },
+            { id: 9, name: "Bespoke Deep Wave Peruvian Closure Wig", price: 135000, category: "Hairs", image: "https://images.unsplash.com/photo-1605497746444-1224591a532d?auto=format&fit=crop&q=80&w=400", desc: "Thick volume density bouncy dynamic curls with natural color presentation.", featured: false },
+            { id: 10, name: "Premium Velvet Padded Headband Set", price: 8500, category: "Hairs", image: "https://images.unsplash.com/photo-1576243345690-4e4b79b63288?auto=format&fit=crop&q=80&w=400", desc: "Elegant designer embellished hair control crown for elite events.", featured: false },
+            { id: 11, name: "Children Silk Satin Sleep Bonnet Pack", price: 6000, category: "Hairs", image: "https://images.unsplash.com/photo-1606164311210-928cc8877bc9?auto=format&fit=crop&q=80&w=400", desc: "Protective friction-free curly hair care tool tailored for toddlers.", featured: false },
+            { id: 12, name: "Auburn Pixie Cut Human Hair Wig", price: 95000, category: "Hairs", image: "https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&q=80&w=400", desc: "Low maintenance chic short hairstyle structure with rich pigment styling.", featured: false },
+
+            // CATEGORY 3: BRACELETS & JEWELRY
+            { id: 13, name: "Artisanal 18K Gold Plated Minimalist Cuff", price: 25000, category: "Bracelets", image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=400", desc: "Hypoallergenic tarnish-resistant premium metal arm bracelet jewelry piece.", featured: true },
+            { id: 14, name: "Natural Lava Stone Unisex Bead Bracelet", price: 12000, category: "Bracelets", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=400", desc: "Grounding volcanic texturized matching items suitable for men & women.", featured: false },
+            { id: 15, name: "Customized Keepsake Infant Identification Bangle", price: 16500, category: "Bracelets", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=400", desc: "Soft round edges polished adjustable metal charm bracelet for kids.", featured: false },
+            { id: 16, name: "Bohemian Layered Raw Crystal Wristlet", price: 14000, category: "Bracelets", image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=400", desc: "Beautiful quartz raw stones strung with durable braided leather bindings.", featured: false },
+
+            // CATEGORY 4: SHOES (CHILDREN & ADULT UNISEX)
+            { id: 17, name: "Premium Leather Chelsea Boots", price: 48000, category: "Shoes", image: "https://images.unsplash.com/photo-1638247025967-b4e38f787b76?auto=format&fit=crop&q=80&w=400", desc: "Rich textured Italian calfskin boots with flexible elastic panels.", featured: true },
+            { id: 18, name: "Toddler First-Walkers Soft Sole Loafers", price: 16000, category: "Shoes", image: "https://images.unsplash.com/photo-1514989940723-e8e5163ccbe8?auto=format&fit=crop&q=80&w=400", desc: "Ergonomic leather support flats crafted perfectly for safe growth.", featured: false },
+            { id: 19, name: "Unisex Breathable Mesh Cloud Sneakers", price: 32000, category: "Shoes", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=400", desc: "Ultra-light impact absorbing urban running shoes for daily utility.", featured: false },
+            { id: 20, name: "Kids Light-Up Waterproof Rubber Rainboots", price: 14500, category: "Shoes", image: "https://images.unsplash.com/photo-1533681018184-68bd1d8f39fc?auto=format&fit=crop&q=80&w=400", desc: "Fun vibrant heavy-grip weather protection boots for children outdoor play.", featured: false },
+            { id: 21, name: "Embellished Motherhood Comfort Slide Sandals", price: 19000, category: "Shoes", image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&q=80&w=400", desc: "Orthopedic footbed with premium stones dressy presentation for pregnant moms.", featured: false },
+
+            // CATEGORY 5: BABY FOOD & NUTRIENTS
+            { id: 22, name: "Organic Multigrain Baby Cereal with Dates", price: 7500, category: "Baby Food", image: "https://images.unsplash.com/photo-1595855759920-86582396756a?auto=format&fit=crop&q=80&w=400", desc: "Rich source of dietary iron and fiber with natural sweetener components.", featured: true },
+            { id: 23, name: "Freeze-Dried Organic Fruit Puree Melts", price: 4200, category: "Baby Food", image: "https://images.unsplash.com/photo-1543083477-4f785ae82423?auto=format&fit=crop&q=80&w=400", desc: "Dissolves instantly in mouth. Made with 100% genuine strawberry banana.", featured: false },
+            { id: 24, name: "Premium Dairy Formula Nutrient Fortified", price: 18500, category: "Baby Food", image: "https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&q=80&w=400", desc: "Essential brain developmental fatty acids composition for growth stages.", featured: false },
+            { id: 25, name: "Gluten-Free Non-GMO Puffed Rice Snacks", price: 3800, category: "Baby Food", image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&q=80&w=400", desc: "Baked perfectly with zero additives. Encourages self-feeding motor control.", featured: false },
+
+            // CATEGORY 6: PICTURES & WALL ART DECOR
+            { id: 26, name: "Minimalist Watercolor Safari Animal Canvas", price: 15000, category: "Pictures", image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=400", desc: "Calming pastel framed oil prints ideal for calming nursery accentuation.", featured: true },
+            { id: 27, name: "Abstract Line Art 'Motherly Embrace' Print", price: 18000, category: "Pictures", image: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&q=80&w=400", desc: "High definition textured canvas print celebrating beautiful motherhood bonds.", featured: false },
+            { id: 28, name: "Personalized Newborn Typography Birth Frame", price: 12500, category: "Pictures", image: "https://images.unsplash.com/photo-1580136579312-94651dfd596d?auto=format&fit=crop&q=80&w=400", desc: "Custom printed fields including birth dates, length metrics, name parameters.", featured: false },
+            { id: 29, name: "Celestial Star Map Custom Night Print", price: 21000, category: "Pictures", image: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&q=80&w=400", desc: "Accurate alignment of constellations mapped according to a precious birth time.", featured: false },
+
+            // CROSS OVER REINFORCEMENTS TO SECURE CLEARLY >30 OBJECTS
+            { id: 30, name: "Unisex Silk Utility Urban Cargo Pants", price: 26500, category: "Clothes", image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=400", desc: "Multi-pocket tactical design constructed out of smooth premium grade cotton.", featured: false },
+            { id: 31, name: "Luxury Golden Shell Anklet Duo", price: 9500, category: "Bracelets", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=400", desc: "Polished beachside accessory layered jewelry chain configuration.", featured: false },
+            { id: 32, name: "Fortified Organic Oats & Apple Jar", price: 4800, category: "Baby Food", image: "https://images.unsplash.com/photo-1611095780122-f04bf46497ed?auto=format&fit=crop&q=80&w=400", desc: "Delightfully pureed nutritional baby snack packed with essential vitamins.", featured: false }
+        ];
+
+        // RETAINER FOR APPLICATION APP CART INSTANCE STATE
+        let activeCart = [];
+        let currentFilter = 'All';
+
+        // CLIENT ROUTING INTERFACE CONTROLLER
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(`page-${pageId}`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Adjust active navigation styling indicators
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if(link.innerText.toLowerCase().includes(pageId)) {
+                    link.classList.add('text-amber-700', 'font-bold');
+                } else {
+                    link.classList.remove('text-amber-700', 'font-bold');
+                }
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // PRODUCTS VISUAL GENERATION CARDS PIPELINE
+        function buildProductCardHtml(product) {
+            return `
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-xs hover:shadow-md transition overflow-hidden group flex flex-col h-full">
+                    <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                        <img src="${product.image}" alt="${product.name}" class="object-cover w-full h-full group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 bg-white/90 text-gray-900 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md shadow-xs backdrop-blur-xs">
+                            ${product.category}
+                        </span>
+                    </div>
+                    <div class="p-4 flex flex-col flex-grow space-y-2">
+                        <h3 class="font-bold text-gray-900 text-sm line-clamp-1 group-hover:text-amber-700 transition">${product.name}</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed flex-grow">${product.desc}</p>
+                        <div class="pt-2 flex items-center justify-between gap-2 mt-auto">
+                            <span class="font-mono font-bold text-base text-gray-900">₦${product.price.toLocaleString()}</span>
+                            <button onclick="addProductToBag(${product.id})" class="bg-amber-600 text-white p-2 rounded-lg text-xs font-semibold hover:bg-amber-700 transition flex items-center space-x-1 shrink-0">
+                                <i class="fa-solid fa-plus"></i> <span>Add to Bag</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // INITIAL INJECTION PIPELINE LOADER
+        function initializeStoreCatalog() {
+            // Render 1: Top Featured Showcase Section (Home)
+            const featuredContainer = document.getElementById('featured-products-container');
+            const featuredItems = productsDatabase.filter(p => p.featured);
+            featuredContainer.innerHTML = featuredItems.map(p => buildProductCardHtml(p)).join('');
+
+            // Render 2: Main Filters Sidebar Selection
+            const categoriesSet = ['All', 'Clothes', 'Shoes', 'Hairs', 'Bracelets', 'Baby Food', 'Pictures', 'Mother Care'];
+            const filterContainer = document.getElementById('category-filters-list');
+            
+            filterContainer.innerHTML = categoriesSet.map(cat => {
+                return `
+                    <button onclick="filterShopCategory('${cat}')" id="filter-btn-${cat.replace(/\s+/g, '')}" class="w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition flex items-center justify-between bg-gray-50 text-gray-700 hover:bg-amber-50 hover:text-amber-800">
+                        <span>${cat} Collection</span>
+                        <i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i>
+                    </button>
+                `;
+            }).join('');
+
+            updateCatalogGridDisplay();
+        }
+
+        // COMPREHENSIVE FILTER SYSTEM ALGORITHM
+        function filterShopCategory(categoryKeyword) {
+            currentFilter = categoryKeyword;
+            switchPage('shop');
+            updateCatalogGridDisplay();
+        }
+
+        function updateCatalogGridDisplay() {
+            const gridContainer = document.getElementById('market-catalog-grid');
+            
+            // Core filter filtering rules (Mother Care binds everything or splits)
+            let filteredResults = productsDatabase;
+            if (currentFilter !== 'All') {
+                if (currentFilter === 'Mother Care') {
+                    // Mother Care encapsulates Baby foods, nursery pictures and specialty items
+                    filteredResults = productsDatabase.filter(p => ['Baby Food', 'Pictures', 'Hairs'].includes(p.category));
+                } else {
+                    filteredResults = productsDatabase.filter(p => p.category === currentFilter);
+                }
+            }
+
+            // Sync visual stats reporting numbers
+            document.getElementById('displayed-products-count').innerText = filteredResults.length;
+            document.getElementById('active-filter-label').innerText = `${currentFilter} Collection`;
+
+            // Refresh Active Button Highlight Styling
+            const categoriesSet = ['All', 'Clothes', 'Shoes', 'Hairs', 'Bracelets', 'Baby Food', 'Pictures', 'Mother Care'];
+            categoriesSet.forEach(cat => {
+                const btn = document.getElementById(`filter-btn-${cat.replace(/\s+/g, '')}`);
+                if (btn) {
+                    if (cat === currentFilter) {
+                        btn.className = "w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition flex items-center justify-between bg-amber-600 text-white shadow-xs";
+                    } else {
+                        btn.className = "w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition flex items-center justify-between bg-gray-50 text-gray-700 hover:bg-amber-50 hover:text-amber-800";
+                    }
+                }
+            });
+
+            if (filteredResults.length === 0) {
+                gridContainer.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400">No custom items loaded in this category.</div>`;
+            } else {
+                gridContainer.innerHTML = filteredResults.map(p => buildProductCardHtml(p)).join('');
+            }
+        }
+
+        // FULL SHOPPING CART OPERATIONAL ENGINE CONTROLLERS
+        function toggleCart(openState) {
+            const panel = document.getElementById('cart-panel');
+            const overlay = document.getElementById('cart-overlay');
+            if (openState) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    panel.classList.remove('translate-x-full');
+                    panel.classList.add('translate-x-0');
+                }, 10);
+            } else {
+                panel.classList.remove('translate-x-0');
+                panel.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        function addProductToBag(productId) {
+            const targetedItem = productsDatabase.find(p => p.id === productId);
+            const duplicateEntry = activeCart.find(item => item.product.id === productId);
+
+            if (duplicateEntry) {
+                duplicateEntry.quantity += 1;
+            } else {
+                activeCart.push({ product: targetedItem, quantity: 1 });
+            }
+
+            renderCartState();
+            toggleCart(true);
+        }
+
+        function modifyQuantity(productId, stepDelta) {
+            const entryIndex = activeCart.findIndex(item => item.product.id === productId);
+            if (entryIndex > -1) {
+                activeCart[entryIndex].quantity += stepDelta;
+                if (activeCart[entryIndex].quantity <= 0) {
+                    activeCart.splice(entryIndex, 1);
+                }
+            }
+            renderCartState();
+        }
+
+        function renderCartState() {
+            const listContainer = document.getElementById('cart-items-container');
+            const counterBadge = document.getElementById('cart-count');
+            const totalDisplay = document.getElementById('cart-subtotal');
+
+            // Count total items quantity pieces
+            const aggregateCount = activeCart.reduce((sum, item) => sum + item.quantity, 0);
+            counterBadge.innerText = aggregateCount;
+
+            if (activeCart.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-center py-12 text-gray-400 space-y-3">
+                        <i class="fa-solid fa-box-open text-4xl block text-gray-300"></i>
+                        <p class="text-sm">Your shopping bag is completely empty.</p>
+                        <button onclick="toggleCart(false); switchPage('shop')" class="text-xs bg-amber-50 text-amber-700 font-bold px-4 py-2 rounded-lg hover:bg-amber-100 transition">Browse Catalog Now</button>
+                    </div>
+                `;
+                totalDisplay.innerText = "₦0";
+                return;
+            }
+
+            let computedTotal = 0;
+            listContainer.innerHTML = activeCart.map(item => {
+                const netCost = item.product.price * item.quantity;
+                computedTotal += netCost;
+                return `
+                    <div class="flex items-center space-x-4 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <img src="${item.product.image}" alt="${item.product.name}" class="w-16 h-16 rounded-lg object-cover bg-white border shrink-0">
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-bold text-gray-900 text-xs truncate">${item.product.name}</h4>
+                            <span class="text-xs text-gray-500 font-medium block mt-0.5">₦${item.product.price.toLocaleString()} each</span>
+                            <span class="font-mono font-bold text-xs text-amber-700 block mt-1">Total: ₦${netCost.toLocaleString()}</span>
+                        </div>
+                        <div class="flex flex-col items-center border bg-white rounded-lg overflow-hidden shrink-0">
+                            <button onclick="modifyQuantity(${item.product.id}, 1)" class="px-2 py-0.5 hover:bg-gray-100 text-gray-600 transition text-[10px]"><i class="fa-solid fa-chevron-up"></i></button>
+                            <span class="px-2 font-bold text-xs text-gray-800 font-mono">${item.quantity}</span>
+                            <button onclick="modifyQuantity(${item.product.id}, -1)" class="px-2 py-0.5 hover:bg-gray-100 text-gray-600 transition text-[10px]"><i class="fa-solid fa-chevron-down"></i></button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            totalDisplay.innerText = `₦${computedTotal.toLocaleString()}`;
+        }
+
+        // DYNAMIC PRE-FILLED AUTOMATIC WHATSAPP ORDER EXTRACTION ROUTINE
+        function triggerWhatsAppCheckout() {
+            if (activeCart.length === 0) {
+                alert("Please add items to your shopping bag before proceeding to checkout!");
+                return;
+            }
+
+            const clientHotline = "2347036615507";
+            let messageBody = `🛍️ *SARAYEE COLLECTIVE ORDER REQUEST*\n`;
+            messageBody += `=========================\n\n`;
+            
+            let accumulatedSum = 0;
+            activeCart.forEach((item, index) => {
+                const subCost = item.product.price * item.quantity;
+                accumulatedSum += subCost;
+                messageBody += `${index + 1}. *${item.product.name}*\n`;
+                messageBody += `   Category: [${item.product.category}]\n`;
+                messageBody += `   Quantity: ${item.quantity} pc(s) x ₦${item.product.price.toLocaleString()}\n`;
+                messageBody += `   Subtotal: ₦${subCost.toLocaleString()}\n\n`;
+            });
+
+            messageBody += `=========================\n`;
+            messageBody += `💰 *TOTAL ORDER AMOUNT:* ₦${accumulatedSum.toLocaleString()}\n\n`;
+            messageBody += `📍 _Please provide your Delivery Address and Full Name below:_\n`;
+            messageBody += `• Name:\n• Delivery Location Hub:\n• Alternative Phone Number:\n\n`;
+            messageBody += `Thank you for choosing Sarayee Collective! Sarah will confirm your shipment parameters instantly. ✨`;
+
+            const encodedApiString = encodeURIComponent(messageBody);
+            const destinationEndpoint = `https://wa.me/${clientHotline}?text=${encodedApiString}`;
+            window.open(destinationEndpoint, '_blank');
+        }
+
+        // CONTACT CONTACT MESSAGE HOOK PORTAL HANDLING
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const clientHotline = "2347036615507";
+            const clientName = document.getElementById('contact-name').value;
+            const chosenSubject = document.getElementById('contact-subject').value;
+            const descriptiveMessage = document.getElementById('contact-message').value;
+
+            let messageBody = `📬 *SARAYEE COLLECTIVE CONTACT INQUIRY*\n\n`;
+            messageBody += `👤 *Client Name:* ${clientName}\n`;
+            messageBody += `📋 *Inquiry Category:* ${chosenSubject}\n\n`;
+            messageBody += `💬 *Detailed Message:*\n"${descriptiveMessage}"\n\n`;
+            messageBody += `_Sent from Sarayee Interactive Hub Website Portfolio._`;
+
+            const encodedApiString = encodeURIComponent(messageBody);
+            const destinationEndpoint = `https://wa.me/${clientHotline}?text=${encodedApiString}`;
+            window.open(destinationEndpoint, '_blank');
+            
+            // Clear inputs safely
+            document.getElementById('contact-name').value = '';
+            document.getElementById('contact-message').value = '';
+        }
+
+        // TRIGGER CENTRAL EXECUTION INITIALIZERS ON DOCUMENT LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeStoreCatalog();
+        });
+    </script>
+</body>
+</html>
